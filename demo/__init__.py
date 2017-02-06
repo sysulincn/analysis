@@ -41,9 +41,9 @@ def graph_data(stock):
     ax1 = plt.subplot2grid((6,1), (0,0), rowspan=1, colspan=1)
     plt.title(stock)
     plt.ylabel('H-L')
-    ax2 = plt.subplot2grid((6,1), (1,0), rowspan=4, colspan=1, sharex=ax1)
+    ax_volume = plt.subplot2grid((6,1), (1,0), rowspan=4, colspan=1, sharex=ax1)
     plt.ylabel('Price')
-    ax2v = ax2.twinx()
+    ax2v = ax_volume.twinx()
 
     ax3 = plt.subplot2grid((6,1), (5,0), rowspan=1, colspan=1, sharex=ax1)
     plt.ylabel('MAvgs')
@@ -85,20 +85,20 @@ def graph_data(stock):
     ax1.yaxis.set_major_locator(mticker.MaxNLocator(nbins=4, prune='lower'))
 
 
-    candlestick_ohlc(ax2, ohlc[-start:], width=0.4, colorup='#77d879', colordown='#db3f3f')
+    candlestick_ohlc(ax_volume, ohlc[-start:], width=0.4, colorup='#77d879', colordown='#db3f3f')
 
 
 
-    ax2.yaxis.set_major_locator(mticker.MaxNLocator(nbins=7, prune='upper'))
-    ax2.grid(True)
+    ax_volume.yaxis.set_major_locator(mticker.MaxNLocator(nbins=7, prune='upper'))
+    ax_volume.grid(True)
 
     bbox_props = dict(boxstyle='round',fc='w', ec='k',lw=1)
 
-    ax2.annotate(str(closep[-1]), (date[-1], closep[-1]),
+    ax_volume.annotate(str(closep[-1]), (date[-1], closep[-1]),
                  xytext = (date[-1]+4, closep[-1]), bbox=bbox_props)
 
 ##    # Annotation example with arrow
-##    ax2.annotate('Bad News!',(date[11],highp[11]),
+##    ax_volume.annotate('Bad News!',(date[11],highp[11]),
 ##                 xytext=(0.8, 0.9), textcoords='axes fraction',
 ##                 arrowprops = dict(facecolor='grey',color='grey'))
 ##
@@ -108,7 +108,7 @@ def graph_data(stock):
 ##                 'color':'darkred',
 ##                 'size':15}
 ##    # Hard coded text 
-##    ax2.text(date[10], closep[1],'Text Example', fontdict=font_dict)
+##    ax_volume.text(date[10], closep[1],'Text Example', fontdict=font_dict)
 
     ax2v.plot([],[], color='#0079a3', alpha=0.4, label='Volume')
     ax2v.fill_between(date[-start:],0, volume[-start:], facecolor='#0079a3', alpha=0.4)
@@ -139,7 +139,7 @@ def graph_data(stock):
 
 
     plt.setp(ax1.get_xticklabels(), visible=False)
-    plt.setp(ax2.get_xticklabels(), visible=False)
+    plt.setp(ax_volume.get_xticklabels(), visible=False)
     plt.subplots_adjust(left=0.11, bottom=0.24, right=0.90, top=0.90, wspace=0.2, hspace=0)
 
     ax1.legend()
