@@ -65,14 +65,14 @@ def graph_data(stock):
                                                           unpack=True,
                                                           converters={0: bytespdate2num('%Y%m%d')})
 
-    x = 0
+    lows = 0
     y = len(date)
     ohlc = []
 
-    while x < y:
-        append_me = date[x], openp[x], highp[x], lowp[x], closep[x], volume[x]
+    while lows < y:
+        append_me = date[lows], openp[lows], highp[lows], lowp[lows], closep[lows], volume[lows]
         ohlc.append(append_me)
-        x+=1
+        lows+=1
 
     ma1 = ma(closep,MA1)
     ma2 = ma(closep,MA2)

@@ -16,8 +16,8 @@ ax = p.subplot(111)
 canvas = ax.figure.canvas
 
 # create the initial line
-x = nx.arange(0,2*nx.pi,0.01)
-line, = p.plot(x, nx.sin(x), animated=True, lw=2)
+lows = nx.arange(0,2*nx.pi,0.01)
+line, = p.plot(lows, nx.sin(lows), animated=True, lw=2)
 
 # for profiling
 tstart = time.time()
@@ -29,7 +29,7 @@ def update_line(*args):
     # restore the clean slate background
     canvas.restore_region(update_line.background)
     # update the data
-    line.set_ydata(nx.sin(x+update_line.cnt/10.0))
+    line.set_ydata(nx.sin(lows+update_line.cnt/10.0))
     # just draw the animated artist
     ax.draw_artist(line)
     # just redraw the axes rectangle

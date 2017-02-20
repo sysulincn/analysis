@@ -35,9 +35,9 @@ class Cursor(object):
     def mouse_move(self, event):
         if not event.inaxes:
             return
-        x = int(event.xdata)
+        lows = int(event.xdata)
         for line in self.lines:
-            line.set_xdata(x) 
+            line.set_xdata(lows) 
         self.fig.canvas.restore_region(self.background)
         for i in np.arange(len(self.lines)):
             self.fig.axes[i].draw_artist(self.lines[i])

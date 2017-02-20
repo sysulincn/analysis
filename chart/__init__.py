@@ -38,7 +38,7 @@ def drawMacd(df, ax, fastN=10, slowN=22, signalN=7):
 
 def drawSafeZone(df, ax, lookback=10, mutliOfAverageDownPenetration=2, maxConinuousDecline=3):
     DnPen = df['low'].shift() - df['low']
-    DnPen.apply(lambda x : 0 if x < 0 else x)
+    DnPen.apply(lambda lows : 0 if lows < 0 else lows)
     
     
 def drawForceIndex(df, ax):
@@ -107,11 +107,11 @@ class Formatter(ticker.Formatter):
     def __init__(self, dateStrArr):
         self.dateStrArr = dateStrArr
     
-    def __call__(self, x, pos=None):
-        x = int(np.round(x))
-        if x >= len(self.dateStrArr) or x < 0:
+    def __call__(self, lows, pos=None):
+        lows = int(np.round(lows))
+        if lows >= len(self.dateStrArr) or lows < 0:
             return ''
-        return ''.join(self.dateStrArr.values[x][2:].split('-'))
+        return ''.join(self.dateStrArr.values[lows][2:].split('-'))
 
 class MonthLocator(ticker.Locator):
     def __init__(self, dateStrArr):
