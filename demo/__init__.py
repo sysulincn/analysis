@@ -18,7 +18,7 @@ print(plt.__file__)
 MA1 = 10
 MA2 = 30
 
-def moving_average(values, window):
+def ma(values, window):
     weights = np.repeat(1.0, window)/window
     smas = np.convolve(values, weights, 'valid')
     return smas
@@ -74,8 +74,8 @@ def graph_data(stock):
         ohlc.append(append_me)
         x+=1
 
-    ma1 = moving_average(closep,MA1)
-    ma2 = moving_average(closep,MA2)
+    ma1 = ma(closep,MA1)
+    ma2 = ma(closep,MA2)
     start = len(date[MA2-1:])
 
     h_l = list(map(high_minus_low, highp, lowp))
