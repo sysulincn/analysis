@@ -29,7 +29,6 @@ print(df[['low', 'dn', 'dnAvg', 'shortStop', 'protectStop']])
 def genSafeZoneIndex_rolling(lows, lookback=10, multi=2, max=3):
     previousLow = lows.shift()
     dn = previousLow - lows
-#     dnAvg = dn.rolling(lookback).apply(lambda x : )
     pass
 
 def genSafeZoneIndex_plain(lows, lookback=10, multi=2, max=3):

@@ -18,18 +18,23 @@ import chart
 
 def main():
     plt.style.use('dark_background')
-    code = '603568'
+    code = '002230'
+    
+    df = ts.get_k_data(code, start='2015-12-13', ktype='W')
+    
     fig = plt.figure();
-    chart.plotDailyK(code, fig)
-    fig.canvas.draw()
+    fig.suptitle(code)
+    chart.plotDailyK(df, fig)
     cursor = Cursor(fig)
     plt.connect('motion_notify_event', cursor.mouse_move)
+    plt.connect('resize_event', cursor.resize)
     plt.show()
 
 class Cursor(object):
     def __init__(self, fig):
         self.fig = fig
-        self.lines = list(map(lambda ax:ax.axvline(color='w'), fig.axes))
+        self.lines = list(map(lambda ax:ax.axvline(color='w', animated=True), fig.axes))
+        fig.canvas.draw()
         self.background = fig.canvas.copy_from_bbox(self.fig.bbox) 
     
     def mouse_move(self, event):
@@ -42,6 +47,10 @@ class Cursor(object):
         for i in np.arange(len(self.lines)):
             self.fig.axes[i].draw_artist(self.lines[i])
         self.fig.canvas.blit(self.fig.bbox)
-
+    
+    def resize(self, event):
+        self.fig.canvas.draw()
+        self.background = self.fig.canvas.copy_from_bbox(self.fig.bbox)
+    
 if __name__ == "__main__":
     main()

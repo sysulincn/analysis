@@ -1,24 +1,5 @@
 import numpy as np
 
-def ma(lows, n, type='exponential'):
-    """
-    compute an n period moving average.
-
-    type is 'simple' | 'exponential'
-
-    """
-    lows = np.asarray(lows)
-    if type == 'simple':
-        weights = np.ones(n)
-    else:
-        weights = np.exp(np.linspace(-1., 0., n))
-
-    weights /= weights.sum()
-
-    a = np.convolve(lows, weights, mode='full')[:len(lows)]
-    a[:n] = a[n]
-    return a
-
 def ema(lows, n):
     lows = np.asarray(lows)
     def gen(lows, n):
@@ -34,7 +15,4 @@ def ema(lows, n):
     return np.asarray(list(gen(lows,n)))
 
 
-lows = np.arange(100)
 
-print(ma(lows, 10))
-print(ema(lows, 10))
