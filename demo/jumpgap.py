@@ -1,14 +1,16 @@
 '''
-Created on 2017å¹´1æœˆ29æ—¥
+Created on 2017å¹?1æœ?29æ—?
 
 @author: linchengnan
 '''
 from matplotlib import pyplot as plt 
 from matplotlib import scale as mscale 
-from matplotlib import transforms as mtransforms 
 from matplotlib import ticker as mticker 
+from matplotlib import transforms as mtransforms 
+
 import numpy as np 
- 
+
+
 class SegmentLocator(mticker.Locator): 
     def __init__(self, lows, gap, nbins=5): 
         self.nbins = nbins 

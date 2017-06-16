@@ -1,26 +1,26 @@
-import tushare as ts
-import matplotlib as mpl
-from matplotlib.widgets import MultiCursor
-from matplotlib.pyplot import axvline, axhline
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import matplotlib.ticker as mticker
-from matplotlib.finance import candlestick_ohlc
 from matplotlib import style
+from matplotlib.finance import candlestick_ohlc
+from matplotlib.pyplot import axvline, axhline
 from matplotlib.ticker import Formatter
+from matplotlib.widgets import MultiCursor
 
-
-import numpy as np
-import datetime as dt
-import ticker
-import index as idx
 import chart
+import datetime as dt
+import index as idx
+import matplotlib as mpl
+import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
+import numpy as np
+import ticker
+import tushare as ts
+
 
 def main():
     plt.style.use('dark_background')
-    code = '002230'
+    code = '002716'
     
-    df = ts.get_k_data(code, start='2015-12-13', ktype='W')
+    df = ts.get_k_data(code, start='2015-12-13')
     
     fig = plt.figure();
     fig.suptitle(code)

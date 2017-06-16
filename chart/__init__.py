@@ -44,9 +44,10 @@ def drawSafeZone(df, ax, lookback=10, multi=2, maxContinuousDecline=3):
     protectStop = stops.rolling(maxContinuousDecline).max()
     ax.plot(np.arange(len(df)), protectStop)
     
-def drawForceIndex(df, ax):
+def drawForceIndex(df, ax, ema=[(2, 'red'), (13, 'yellow')]):
     forceIndex = (df['close'] - df['close'].shift()).fillna(0)*df['volume']
-    ax.plot(np.arange(len(df)), idx.ema(forceIndex, 2), lw=0.5, color='orange')
+    for n,color in ema:
+        ax.plot(np.arange(len(df)), idx.ema(forceIndex, n), lw=0.5, color=color)
     ax.plot([0,len(df)], [0, 0], color='w', lw=0.5)
 
 def plotDailyK(df, fig):
@@ -58,7 +59,7 @@ def plotDailyK(df, fig):
 #     lines.append(ax_k.plot())
     drawK(df, ax_k, [(5, 'Orange'), (10, 'Orchid')]) 
     drawSafeZone(df, ax_k)
-    drawMacd(df, ax_macd)
+    drawMacd(df, ax_macd, fastN=12, slowN=26, signalN=9)
     drawForceIndex(df, ax_forceIndex)
     
     majorFormatter = Formatter(df['date'])

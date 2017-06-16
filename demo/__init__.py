@@ -1,14 +1,18 @@
-import matplotlib as mpl
-mpl.use('Qt5Agg')
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import matplotlib.ticker as mticker
-from matplotlib.finance import candlestick_ohlc
-from matplotlib import style
-
-import numpy as np
 import urllib
+
+from matplotlib import style
+from matplotlib.finance import candlestick_ohlc
+
 import datetime as dt
+import matplotlib as mpl
+import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
+import numpy as np
+
+
+mpl.use('Qt5Agg')
+
 
 style.use('fivethirtyeight')
 print(plt.style.available)

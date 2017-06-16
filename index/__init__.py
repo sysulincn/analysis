@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def ema(lows, n):
     lows = np.asarray(lows)
     def gen(lows, n):
