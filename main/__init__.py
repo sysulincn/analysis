@@ -44,8 +44,8 @@ class Cursor(object):
         for line in self.lines:
             line.set_xdata(lows) 
         self.fig.canvas.restore_region(self.background)
-        for i in np.arange(len(self.lines)):
-            self.fig.axes[i].draw_artist(self.lines[i])
+        for d in np.arange(len(self.lines)):
+            self.fig.axes[d].draw_artist(self.lines[d])
         self.fig.canvas.blit(self.fig.bbox)
     
     def resize(self, event):

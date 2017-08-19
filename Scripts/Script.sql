@@ -1,0 +1,1 @@
+select max(date) from ST_NHNL_SERIES

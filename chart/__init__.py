@@ -12,10 +12,10 @@ import tushare as ts
 def drawK(df, ax_k, ema):
     ax_volume = ax_k.twinx()
     quotes = []
-    i = 0
+    d = 0
     for _, row in df.iterrows():
-        quotes.append((i, row['open'], row['high'], row['low'], row['close']))
-        i += 1
+        quotes.append((d, row['open'], row['high'], row['low'], row['close']))
+        d += 1
     
     candlestick_ohlc(ax_k, quotes, colorup='r', colordown='g', width=0.6)
     for n,color in ema:
@@ -80,10 +80,10 @@ def plotWeeklyK(df, fig):
     drawMacd(df, ax_macd, fastN=12, slowN=24, signalN=8)
     ax_volume = ax_k.twinx()
     quotes = []
-    i=0
+    d=0
     for _,row in df.iterrows():
-        quotes.append((i,row['open'],row['high'],row['low'],row['close']))
-        i+=1
+        quotes.append((d,row['open'],row['high'],row['low'],row['close']))
+        d+=1
     
     candlestick_ohlc(ax_k, quotes, colorup='r', colordown='g', width=0.6)
     ax_k.plot(np.arange(len(df)), idx.ema(df['close'].values, 26), linewidth=0.8)
@@ -120,12 +120,12 @@ class MonthLocator(ticker.Locator):
     
     def __call__(self):
         d = dict()
-        i = 0
+        d = 0
         for dateStr in self.dateStrArr:
             monthStr = dateStr[:-3]
             if monthStr not in d :
-                d[monthStr] = i
-            i += 1
+                d[monthStr] = d
+            d += 1
         return d.values()
 
 class WeekLocator(ticker.Locator):
@@ -134,10 +134,10 @@ class WeekLocator(ticker.Locator):
     
     def __call__(self):
         d = dict()
-        i = 0
+        d = 0
         for dateStr in self.dateStrArr:
             date = dt.datetime.strptime(dateStr, '%Y-%m-%d').strftime('%Y%W')
             if date not in d:
-                d[date] = i
-            i += 1
+                d[date] = d
+            d += 1
         return d.values()
