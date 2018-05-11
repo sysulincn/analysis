@@ -63,11 +63,11 @@ def plotDailyK(df, fig):
     drawForceIndex(df, ax_forceIndex)
     
     majorFormatter = Formatter(df['date'])
-    majorLocator = MonthLocator(df['date'])
-    minorLocator = WeekLocator(df['date'])
+#     majorLocator = MonthLocator(df['date'])
+#     minorLocator = WeekLocator(df['date'])
     ax_macd.xaxis.set_major_formatter(majorFormatter)
-    ax_macd.xaxis.set_major_locator(majorLocator)
-    ax_macd.xaxis.set_minor_locator(minorLocator)
+#     ax_macd.xaxis.set_major_locator(majorLocator)
+#     ax_macd.xaxis.set_minor_locator(minorLocator)
     
     fig.subplots_adjust(hspace=0,wspace=0)
     fig.autofmt_xdate()
@@ -96,9 +96,9 @@ def plotWeeklyK(df, fig):
     ax_volume.plot(np.arange(len(df)), df['volume'], 'k-', linewidth=0.2) 
     
     majorFormatter = Formatter(df['date'])
-    majorLocator = MonthLocator(df['date'])
+#     majorLocator = MonthLocator(df['date'])
     ax_k.xaxis.set_major_formatter(majorFormatter)
-    ax_k.xaxis.set_major_locator(majorLocator)
+#     ax_k.xaxis.set_major_locator(majorLocator)
     
     fig.subplots_adjust(hspace=0,wspace=0)
     fig.autofmt_xdate()
@@ -114,30 +114,28 @@ class Formatter(ticker.Formatter):
             return ''
         return ''.join(self.dateStrArr.values[lows][2:].split('-'))
 
-class MonthLocator(ticker.Locator):
-    def __init__(self, dateStrArr):
-        self.dateStrArr = dateStrArr
-    
-    def __call__(self):
-        d = dict()
-        d = 0
-        for dateStr in self.dateStrArr:
-            monthStr = dateStr[:-3]
-            if monthStr not in d :
-                d[monthStr] = d
-            d += 1
-        return d.values()
+# class MonthLocator(ticker.Locator):
+#     def __init__(self, dateStrArr):
+#         self.dateStrArr = dateStrArr
+#     
+#     def __call__(self):
+#         for dateStr in self.dateStrArr:
+#             monthStr = dateStr[:-3]
+#             if monthStr not in d :
+#                 d[monthStr] = d
+#             d += 1
+#         return d.values()
 
-class WeekLocator(ticker.Locator):
-    def __init__(self, dateStrArr):
-        self.dateStrArr = dateStrArr
-    
-    def __call__(self):
-        d = dict()
-        d = 0
-        for dateStr in self.dateStrArr:
-            date = dt.datetime.strptime(dateStr, '%Y-%m-%d').strftime('%Y%W')
-            if date not in d:
-                d[date] = d
-            d += 1
-        return d.values()
+# class WeekLocator(ticker.Locator):
+#     def __init__(self, dateStrArr):
+#         self.dateStrArr = dateStrArr
+#     
+#     def __call__(self):
+#         d = dict()
+#         d = 0
+#         for dateStr in self.dateStrArr:
+#             date = dt.datetime.strptime(dateStr, '%Y-%m-%d').strftime('%Y%W')
+#             if date not in d:
+#                 d[date] = d
+#             d += 1
+#         return d.values()
