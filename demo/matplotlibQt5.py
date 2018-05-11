@@ -1,3 +1,8 @@
+'''
+Created on 2018年5月11日
+
+@author: linchengnan
+'''
 import sys
 import random
 
@@ -60,8 +65,8 @@ class ApplicationWindow(QMainWindow):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.setWindowTitle("MainWindow")
 
-        self.file_menu = QMenu('&Index', self)
-        self.file_menu.addAction('&WeekChart', self.fileQuit,
+        self.file_menu = QMenu('&File', self)
+        self.file_menu.addAction('&Quit', self.fileQuit,
                                  QtCore.Qt.CTRL + QtCore.Qt.Key_Q)
         self.menuBar().addMenu(self.file_menu)
 

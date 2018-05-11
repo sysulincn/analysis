@@ -18,9 +18,9 @@ import tushare as ts
 
 def main():
     plt.style.use('dark_background')
-    code = '002716'
+    code = '601518'
     
-    df = ts.get_k_data(code, start='2015-12-13')
+    df = ts.get_k_data(code, start='2017-12-13')
     
     fig = plt.figure();
     fig.suptitle(code)
