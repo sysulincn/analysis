@@ -1,5 +1,5 @@
 from matplotlib import style
-from matplotlib.finance import candlestick_ohlc
+from mpl_finance import candlestick_ohlc
 from matplotlib.pyplot import axvline, axhline
 from matplotlib.ticker import Formatter
 from matplotlib.widgets import MultiCursor
@@ -18,7 +18,7 @@ import tushare as ts
 
 def main():
     plt.style.use('dark_background')
-    code = '601518'
+    code = 'sh000902'
     
     df = ts.get_k_data(code, start='2017-12-13')
     
@@ -33,7 +33,7 @@ def main():
 class Cursor(object):
     def __init__(self, fig):
         self.fig = fig
-        self.lines = list(map(lambda ax:ax.axvline(color='w', animated=True), fig.axes))
+        self.lines = list(map(lambda ax_index:ax_index.axvline(color='w', animated=True), fig.axes))
         fig.canvas.draw()
         self.background = fig.canvas.copy_from_bbox(self.fig.bbox) 
     
