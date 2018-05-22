@@ -18,7 +18,7 @@ import tushare as ts
 
 def main():
     plt.style.use('dark_background')
-    code = 'sh000902'
+    code = '601518'
     
     df = ts.get_k_data(code, start='2017-12-13')
     
